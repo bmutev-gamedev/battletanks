@@ -36,10 +36,11 @@ void ATankPlayerController::AimTowardsCrosshair()
     if (!GetControlledTank()) { return;}
     
     FVector HitLocation; // Out parameter
+    // If it hits the landscape     
     if (FindSightRayHitLocation(HitLocation)) // does line tracing
     {
-        UE_LOG(LogTemp, Warning, TEXT("Hit Location: %s"), *HitLocation.ToString());
-        // If it hits the landscape     // Tell controlled tank to aim at this point
+        // Tell controlled tank to aim at this point
+        GetControlledTank()->AimAt(HitLocation);
     }
 }
 
@@ -85,7 +86,7 @@ bool ATankPlayerController::FindLookVectorHitLocation(const FVector LookDirectio
                                                      StartLocation,
                                                      EndLocation,
                                                      ECollisionChannel::ECC_Visibility,
-                                                     FCollisionQueryParams(FName(TEXT("")), false, GetOwner()),
+                                                     FCollisionQueryParams(),
                                                      FCollisionResponseParams()
                                                     );
 
