@@ -22,16 +22,7 @@ void ATankAIController::BeginPlay()
 void ATankAIController::Tick( float DeltaSeconds )
 {
     Super::Tick(DeltaSeconds);
-
-    if (GetPlayerTank())
-    {
-        // TODO Move towards the player
-
-        // Tell controlled tank to aim at this point
-        GetControlledTank()->AimAt(GetPlayerTank()->GetActorLocation());
-
-        // Fire if ready
-    }
+    AimTowardsCrosshair();
 }
 
 ATank* ATankAIController::GetControlledTank() const
@@ -48,4 +39,18 @@ ATank* ATankAIController::GetPlayerTank() const
     }
     
     return Cast<ATank>(PlayerPawn);
+}
+
+// Move tank turret towards aim direction
+void ATankAIController::AimTowardsCrosshair()
+{
+    if (GetPlayerTank())
+    {
+        // TODO Move towards the player
+
+        // Tell controlled tank to aim at this point
+        GetControlledTank()->AimAt(GetPlayerTank()->GetActorLocation());
+
+        // Fire if ready
+    }
 }

@@ -16,18 +16,22 @@ class BATTLETANKS_API ATankPlayerController : public APlayerController
 	
 protected:
     virtual void BeginPlay() override;
-    
 
 private:
     virtual void Tick( float DeltaSeconds ) override;
 
     ATank* GetControlledTank() const;
 
-    // Start the tank moving the barrel so that a shot would hit where
-    // the crosshair intersects the world
+    // Move tank turret towards aim direction
     void AimTowardsCrosshair();
+
+    // Find the potential hit location based on aim
     bool FindSightRayHitLocation(FVector& HitLocation) const;
+
+    // "De-project" the screen position of the crosshair to a world direction
     bool FindLookDirection(FVector2D ScreenLocation, FVector& LookDirection) const;
+
+    // Line-trace along given look direction, and see what was hit (up to max range)
     bool FindLookVectorHitLocation(const FVector LookDirection, FVector& HitLocation) const;
 
     UPROPERTY(EditAnywhere)
@@ -37,5 +41,5 @@ private:
     float CrossHairYLocation = 0.333f;
 
     UPROPERTY(EditAnywhere)
-    float LineTraceRange = 1000000.0f;
+    float LineTraceRange = 1000000.0f; // 10km
 };

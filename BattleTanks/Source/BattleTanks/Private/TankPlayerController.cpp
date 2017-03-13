@@ -31,6 +31,7 @@ ATank* ATankPlayerController::GetControlledTank() const
     return Cast<ATank>(GetPawn());
 }
 
+// Move tank turret towards aim direction
 void ATankPlayerController::AimTowardsCrosshair()
 {
     if (!GetControlledTank()) { return;}
@@ -44,6 +45,7 @@ void ATankPlayerController::AimTowardsCrosshair()
     }
 }
 
+// Find the potential hit location based on aim
 bool ATankPlayerController::FindSightRayHitLocation(FVector& HitLocation) const
 {
     // Find the crosshair position
@@ -66,6 +68,7 @@ bool ATankPlayerController::FindSightRayHitLocation(FVector& HitLocation) const
     return true;    
 }
 
+// "De-project" the screen position of the crosshair to a world direction
 bool ATankPlayerController::FindLookDirection(FVector2D ScreenLocation, FVector& LookDirection) const
 {
     FVector CameraWorldLocation;
@@ -76,6 +79,7 @@ bool ATankPlayerController::FindLookDirection(FVector2D ScreenLocation, FVector&
                                           );
 }
 
+// Line-trace along given look direction, and see what was hit (up to max range)
 bool ATankPlayerController::FindLookVectorHitLocation(const FVector LookDirection, FVector& HitLocation) const
 {
     FHitResult HitResult;
