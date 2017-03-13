@@ -25,11 +25,15 @@ private:
     // the crosshair intersects the world
     void AimTowardsCrosshair();
     bool FindSightRayHitLocation(FVector& HitLocation) const;
-    bool GetLookDirection(FVector2D ScreenLocation, FVector& LookDirection) const;
+    bool FindLookDirection(FVector2D ScreenLocation, FVector& LookDirection) const;
+    bool FindLookVectorHitLocation(const FVector LookDirection, FVector& HitLocation) const;
 
     UPROPERTY(EditAnywhere)
     float CrossHairXLocation = 0.5f;
 
     UPROPERTY(EditAnywhere)
     float CrossHairYLocation = 0.333f;
+
+    UPROPERTY(EditAnywhere)
+    float LineTraceRange = 1000000.0f;
 };
