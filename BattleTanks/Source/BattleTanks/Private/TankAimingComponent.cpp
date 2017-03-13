@@ -3,6 +3,7 @@
 #include "BattleTanks.h"
 #include "TankAimingComponent.h"
 
+#define OUT
 
 // Sets default values for this component's properties
 UTankAimingComponent::UTankAimingComponent()
@@ -26,10 +27,28 @@ void UTankAimingComponent::BeginPlay()
 
 void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 {
-    FString OurTankName = GetOwner()->GetName();
-    FString BarrelLocation = Barrel->GetComponentLocation().ToString();
-    //UE_LOG(LogTemp, Warning, TEXT("%s aiming at %s from %s"), *OurTankName, *HitLocation.ToString(), *BarrelLocation);
-    UE_LOG(LogTemp, Warning, TEXT("Firind at %f"), LaunchSpeed);
+    if (!Barrel) { return; }
+
+    FVector LaunchVelocity;
+    FVector StartLocation = Barrel->GetSocketLocation(FName("Projectile"));
+    
+    // Calculate the LaunchVelocity
+    if (UGameplayStatics::SuggestProjectileVelocity(
+            this,
+        OUT LaunchVelocity,
+            StartLocation,
+            HitLocation,
+            LaunchSpeed,
+            false,
+            0,
+            0,
+            ESuggestProjVelocityTraceOption::DoNotTrace
+        ))
+    {
+        FVector AimDirection = LaunchVelocity.GetSafeNormal();
+        FString TankName = GetOwner()->GetName();
+        UE_LOG(LogTemp, Warning, TEXT("%s aiming at %s"), *TankName, *AimDirection.ToString());
+    }
 }
 
 
