@@ -17,4 +17,8 @@ protected:
 
 private:
     virtual void Tick( float DeltaSeconds ) override;
+
+    // How Close can the AI tank get
+    UPROPERTY(EditDefaultsOnly)
+    float AcceptanceRadius = 3000;
 };

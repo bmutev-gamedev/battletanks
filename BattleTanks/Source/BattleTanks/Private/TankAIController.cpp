@@ -21,6 +21,7 @@ void ATankAIController::Tick( float DeltaSeconds )
     if (PlayerPawn)
     {
         // TODO Move towards the player
+        MoveToActor(PlayerPawn, AcceptanceRadius); // TODO check radius is in cm
 
         // Tell controlled tank to aim at this point
         ControlledPawn->AimAt(PlayerPawn->GetActorLocation());
