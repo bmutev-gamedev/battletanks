@@ -49,13 +49,15 @@ void ATank::AimAt(FVector HitLocation)
 
 void ATank::Fire()
 {
-    UE_LOG(LogTemp, Warning, TEXT("PEW PEW"));
-    
     if (!Barrel) { return; }
+    if (!ProjectileBlueprint) { return; }
 
     // Spawn projectile at barrel location
-    GetWorld()->SpawnActor<AProjectile>(ProjectileBlueprint, 
-                                        Barrel->GetSocketLocation(FName("Projectile")), 
-                                        Barrel->GetSocketRotation(FName("Projectile"))
-                                       );
+    AProjectile* Projectile = GetWorld()->SpawnActor<AProjectile>(
+                                    ProjectileBlueprint, 
+                                    Barrel->GetSocketLocation(FName("Projectile")), 
+                                    Barrel->GetSocketRotation(FName("Projectile"))
+                                );
+
+    Projectile->LaunchProjectile(LaunchSpeed);
 }
