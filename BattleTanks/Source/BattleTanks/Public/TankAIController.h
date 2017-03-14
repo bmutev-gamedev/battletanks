@@ -17,10 +17,4 @@ protected:
 
 private:
     virtual void Tick( float DeltaSeconds ) override;
-
-    ATank* GetControlledTank() const;	
-    ATank* GetPlayerTank() const;
-
-    // Move tank turret towards aim direction
-    void AimTowardsCrosshair();
 };
