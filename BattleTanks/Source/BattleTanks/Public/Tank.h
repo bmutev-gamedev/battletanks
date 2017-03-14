@@ -7,8 +7,9 @@
 
 class UTankBarrel;
 class UTankTurret;
-class UTankAimingComponent;
 class AProjectile;
+class UTankAimingComponent;
+class UTankMovementComponent;
 
 UCLASS()
 class BATTLETANKS_API ATank : public APawn
@@ -27,14 +28,17 @@ public:
 
     void AimAt(FVector HitLocation);
 
-    UFUNCTION(BlueprintCallable)
+    UFUNCTION(BlueprintCallable, Category = Firing)
     void Fire();
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-    UTankAimingComponent* TankAimingComponent = nullptr;
+    UTankAimingComponent*   TankAimingComponent   = nullptr;
+
+    UPROPERTY(BlueprintReadOnly)
+    UTankMovementComponent* TankMovementComponent = nullptr;
 
 private:	
 	// Called to bind functionality to input
