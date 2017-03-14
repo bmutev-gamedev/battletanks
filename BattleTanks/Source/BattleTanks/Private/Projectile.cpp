@@ -30,7 +30,6 @@ void AProjectile::Tick(float DeltaTime)
 
 void AProjectile::LaunchProjectile(float Speed)
 {
-    UE_LOG(LogTemp, Warning, TEXT("PEW PEW at speed %f"), Speed);
     // The projectile was spawned with the rotation taken from the socketo n the barrel,
     // i.e. the projectile will launch in the same direction as the one that the barrel is poining at
     ProjectileMovementComponent->SetVelocityInLocalSpace(FVector::ForwardVector * Speed);
