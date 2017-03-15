@@ -1,7 +1,6 @@
 // Copirtight Funny Ltd.
 
 #include "BattleTanks.h"
-#include "Tank.h"
 #include "TankAimingComponent.h"
 #include "TankPlayerController.h"
 
@@ -10,8 +9,8 @@
 void ATankPlayerController::BeginPlay()
 {
     Super::BeginPlay();
-    UTankAimingComponent* AimingComponent = GetControlledTank()->FindComponentByClass<UTankAimingComponent>();
-    
+
+    UTankAimingComponent* AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
     if (ensure(AimingComponent))
     {
         FoundAimingComponent(AimingComponent);
@@ -28,22 +27,18 @@ void ATankPlayerController::Tick( float DeltaSeconds )
     AimTowardsCrosshair();
 }
 
-ATank* ATankPlayerController::GetControlledTank() const
-{
-    return Cast<ATank>(GetPawn());
-}
-
 // Move tank turret towards aim direction
 void ATankPlayerController::AimTowardsCrosshair()
 {
-    if (!ensure(GetControlledTank())) { return; }
+    UTankAimingComponent* AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
+    if (!ensure(AimingComponent)) { return; }
     
     FVector HitLocation; // Out parameter
     // If it hits the landscape     
     if (FindSightRayHitLocation(HitLocation)) // does line tracing
     {
         // Tell controlled tank to aim at this point
-        GetControlledTank()->AimAt(HitLocation);
+        AimingComponent->AimAt(HitLocation);
     }
 }
 
