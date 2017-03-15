@@ -43,5 +43,5 @@ private:
     float CrossHairYLocation = 0.333f;
 
     UPROPERTY(EditDefaultsOnly)
-    float LineTraceRange = 1000000.0f; // 10km
+    float LineTraceRange = 200000.0f; // 2km
 };

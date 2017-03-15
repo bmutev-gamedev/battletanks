@@ -80,11 +80,10 @@ bool ATankPlayerController::FindLookVectorHitLocation(const FVector LookDirectio
     bool res = GetWorld()->LineTraceSingleByChannel (HitResult,
                                                      StartLocation,
                                                      EndLocation,
-                                                     ECollisionChannel::ECC_Visibility,
-                                                     FCollisionQueryParams(),
-                                                     FCollisionResponseParams()
+                                                     ECollisionChannel::ECC_Visibility
                                                     );
 
+    // TODO Check why res is always TRUE
     if (res)
     {
         HitLocation = HitResult.Location;
