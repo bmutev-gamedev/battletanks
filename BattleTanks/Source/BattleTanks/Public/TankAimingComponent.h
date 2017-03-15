@@ -26,9 +26,6 @@ public:
 	// Sets default values for this component's properties
 	UTankAimingComponent();
 
-    // Called every frame
-    virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
-
     UFUNCTION(BlueprintCallable, Category = "Setup")
     void Initialise(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet);
 
@@ -45,13 +42,18 @@ protected:
     EFiringState FiringState = EFiringState::Reloading;
 
 private:	
+    // Called every frame
+    virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+
+    void MoveBarrelTowards(FVector AimDirectionToUse);
+
+    bool IsBarrelMoving();
+
 	UTankBarrel* Barrel = nullptr;
     UTankTurret* Turret = nullptr;
     
     UPROPERTY(EditDefaultsOnly, Category = "Setup")
     TSubclassOf<AProjectile> ProjectileBlueprint = nullptr;
-
-    void MoveBarrelTowards(FVector AimDirection);
 
     UPROPERTY(EditDefaultsOnly, Category = "Firing")
     float LaunchSpeed = 10000; // TODO find sensible default
@@ -60,4 +62,6 @@ private:
     float ReloadTimeInSeconds = 3.0f;
 
     double LastFireTime = 0;
+
+    FVector AimDirection = FVector(0, 0, 0);
 };
