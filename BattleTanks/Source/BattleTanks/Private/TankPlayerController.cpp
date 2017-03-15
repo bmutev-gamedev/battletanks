@@ -2,6 +2,7 @@
 
 #include "BattleTanks.h"
 #include "Tank.h"
+#include "TankAimingComponent.h"
 #include "TankPlayerController.h"
 
 #define OUT
@@ -9,6 +10,16 @@
 void ATankPlayerController::BeginPlay()
 {
     Super::BeginPlay();
+    UTankAimingComponent* AimingComponent = GetControlledTank()->FindComponentByClass<UTankAimingComponent>();
+    
+    if (AimingComponent)
+    {
+        FoundAimingComponent(AimingComponent);
+    }  
+    else
+    {
+        UE_LOG(LogTemp, Warning, TEXT("Player controller can't find aiming component at Begin Play"))
+    }
 }
 
 void ATankPlayerController::Tick( float DeltaSeconds )
