@@ -18,15 +18,14 @@ void ATankAIController::Tick( float DeltaSeconds )
     ATank* ControlledPawn = Cast<ATank>(GetPawn());
     ATank* PlayerPawn     = Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
 
-    if (PlayerPawn)
-    {
-        // TODO Move towards the player
-        MoveToActor(PlayerPawn, AcceptanceRadius); // TODO check radius is in cm
+    if (!ensure(PlayerPawn)) { return; }
 
-        // Tell controlled tank to aim at this point
-        ControlledPawn->AimAt(PlayerPawn->GetActorLocation());
+    // TODO Move towards the player
+    MoveToActor(PlayerPawn, AcceptanceRadius); // TODO check radius is in cm
 
-        // Fire if ready
-        ControlledPawn->Fire();
-    }
+    // Tell controlled tank to aim at this point
+    ControlledPawn->AimAt(PlayerPawn->GetActorLocation());
+
+    // Fire if ready
+    ControlledPawn->Fire();
 }

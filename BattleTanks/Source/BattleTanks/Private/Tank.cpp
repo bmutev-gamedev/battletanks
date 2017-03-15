@@ -29,14 +29,14 @@ void ATank::SetBarrelReference(UTankBarrel* BarrelToSet)
 
 void ATank::AimAt(FVector HitLocation)
 {
-    if (!TankAimingComponent) { return; }
+    if (!ensure(TankAimingComponent)) { return; }
     TankAimingComponent->AimAt(HitLocation, LaunchSpeed);
 }
 
 void ATank::Fire()
 {
-    if (!Barrel) { return; }
-    if (!ProjectileBlueprint) { return; }
+    if (!ensure(Barrel)) { return; }
+    if (!ensure(ProjectileBlueprint)) { return; }
 
     bool bIsReloaded = (FPlatformTime::Seconds() - LastFireTime) > ReloadTimeInSeconds;
     if (bIsReloaded)

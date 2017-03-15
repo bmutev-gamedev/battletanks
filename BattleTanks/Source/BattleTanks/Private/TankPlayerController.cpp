@@ -12,7 +12,7 @@ void ATankPlayerController::BeginPlay()
     Super::BeginPlay();
     UTankAimingComponent* AimingComponent = GetControlledTank()->FindComponentByClass<UTankAimingComponent>();
     
-    if (AimingComponent)
+    if (ensure(AimingComponent))
     {
         FoundAimingComponent(AimingComponent);
     }  
@@ -36,7 +36,7 @@ ATank* ATankPlayerController::GetControlledTank() const
 // Move tank turret towards aim direction
 void ATankPlayerController::AimTowardsCrosshair()
 {
-    if (!GetControlledTank()) { return;}
+    if (!ensure(GetControlledTank())) { return; }
     
     FVector HitLocation; // Out parameter
     // If it hits the landscape     
