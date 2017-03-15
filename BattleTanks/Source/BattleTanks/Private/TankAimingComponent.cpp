@@ -24,8 +24,8 @@ void UTankAimingComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// ...
-	
+    // First fire should start after initial reload
+    LastFireTime = FPlatformTime::Seconds();
 }
 
 void UTankAimingComponent::Initialise(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet)
@@ -39,7 +39,12 @@ void UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType, F
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	// ...
+    if ((FPlatformTime::Seconds() - LastFireTime) > ReloadTimeInSeconds)
+    {
+        FiringState = EFiringState::Reloading;
+    }
+    // TODO Handle aiming and locked states
+
 }
 
 void UTankAimingComponent::AimAt(FVector HitLocation)
@@ -86,12 +91,11 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 
 void UTankAimingComponent::Fire()
 {
-    if (!ensure(Barrel)) { return; }
-    if (!ensure(ProjectileBlueprint)) { return; }
-
-    bool bIsReloaded = (FPlatformTime::Seconds() - LastFireTime) > ReloadTimeInSeconds;
-    if (bIsReloaded)
+    if (FiringState != EFiringState::Reloading)
     {
+        if (!ensure(Barrel)) { return; }
+        if (!ensure(ProjectileBlueprint)) { return; }
+
         // Spawn projectile at barrel location
         AProjectile* Projectile = GetWorld()->SpawnActor<AProjectile>(
             ProjectileBlueprint, 

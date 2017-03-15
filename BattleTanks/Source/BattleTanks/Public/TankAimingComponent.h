@@ -6,7 +6,7 @@
 #include "TankAimingComponent.generated.h"
 
 UENUM()
-enum class EFiringStatus : uint8
+enum class EFiringState : uint8
 {
     Locked,
     Aiming,
@@ -42,7 +42,7 @@ protected:
 	virtual void BeginPlay() override;
 
     UPROPERTY(BlueprintReadOnly, Category = "State")
-    EFiringStatus FiringStatus = EFiringStatus::Reloading;
+    EFiringState FiringState = EFiringState::Reloading;
 
 private:	
 	UTankBarrel* Barrel = nullptr;
