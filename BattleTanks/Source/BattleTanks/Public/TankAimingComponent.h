@@ -5,10 +5,6 @@
 #include "Components/ActorComponent.h"
 #include "TankAimingComponent.generated.h"
 
-class UTankBarrel;
-class UTankTurret;
-class AProjectile;
-
 UENUM()
 enum class EFiringStatus : uint8
 {
@@ -16,6 +12,10 @@ enum class EFiringStatus : uint8
     Aiming,
     Reloading
 };
+
+class UTankBarrel;
+class UTankTurret;
+class AProjectile;
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class BATTLETANKS_API UTankAimingComponent : public UActorComponent
@@ -34,6 +34,9 @@ public:
 
     void AimAt(FVector HitLocation);
 
+    UFUNCTION(BlueprintCallable, Category = "Firing")
+    void Fire();
+
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
@@ -45,8 +48,16 @@ private:
 	UTankBarrel* Barrel = nullptr;
     UTankTurret* Turret = nullptr;
     
+    UPROPERTY(EditDefaultsOnly, Category = "Setup")
+    TSubclassOf<AProjectile> ProjectileBlueprint = nullptr;
+
     void MoveBarrelTowards(FVector AimDirection);
 
     UPROPERTY(EditDefaultsOnly, Category = "Firing")
-    float LaunchSpeed = 100000; // TODO find sensible default
+    float LaunchSpeed = 10000; // TODO find sensible default
+
+    UPROPERTY(EditDefaultsOnly, Category = "Firing")
+    float ReloadTimeInSeconds = 3.0f;
+
+    double LastFireTime = 0;
 };

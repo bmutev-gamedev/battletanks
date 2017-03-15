@@ -1,7 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "BattleTanks.h"
-#include "Tank.h"
 #include "TankAimingComponent.h"
 #include "TankAIController.h"
 // Depends on movement component via pathfinding system
@@ -28,6 +27,5 @@ void ATankAIController::Tick( float DeltaSeconds )
     AimingComponent->AimAt(PlayerPawn->GetActorLocation());
 
     // Fire if ready
-    ATank* ControlledPawn = Cast<ATank>(GetPawn());
-    ControlledPawn->Fire();
+    AimingComponent->Fire();
 }
