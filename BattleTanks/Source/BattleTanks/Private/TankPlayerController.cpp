@@ -30,6 +30,8 @@ void ATankPlayerController::Tick( float DeltaSeconds )
 // Move tank turret towards aim direction
 void ATankPlayerController::AimTowardsCrosshair()
 {
+    if (!GetPawn()) { return; }
+
     UTankAimingComponent* AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
     if (!ensure(AimingComponent)) { return; }
     
