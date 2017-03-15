@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Copirtight Funny Ltd.
 
 #include "BattleTanks.h"
 #include "Tank.h"

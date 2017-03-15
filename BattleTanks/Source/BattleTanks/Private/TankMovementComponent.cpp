@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Copirtight Funny Ltd.
 
 #include "BattleTanks.h"
 #include "TankTrack.h"
@@ -17,7 +17,6 @@ void UTankMovementComponent::IntendMoveForward(float Throw)
 
     LeftTrack->SetThrottle(Throw);
     RightTrack->SetThrottle(Throw);
-    // TODO Prevent double-speed due to dual control use
 }
 
 void UTankMovementComponent::IntendTurnRight(float Throw)
@@ -27,7 +26,6 @@ void UTankMovementComponent::IntendTurnRight(float Throw)
 
     LeftTrack->SetThrottle(-Throw);
     RightTrack->SetThrottle(Throw);
-    // TODO Prevent double-speed due to dual control use
 }
 
 void UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed)
@@ -40,6 +38,6 @@ void UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool
     float SteeringMagnitude = CrossProduct.Size();
     float ZSign = FMath::Abs(CrossProduct.Z)/CrossProduct.Z;
 
-    // IntendMoveForward(FVector::DotProduct(TankForward, AIForwardIntention));
+    IntendMoveForward(FVector::DotProduct(TankForward, AIForwardIntention));
     IntendTurnRight(SteeringMagnitude * ZSign);
 }
