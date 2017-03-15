@@ -18,10 +18,11 @@ class BATTLETANKS_API ATankPlayerController : public APlayerController
 protected:
     virtual void BeginPlay() override;
 
+    UFUNCTION(BlueprintCallable, Category = "Setup")
+    ATank* GetControlledTank() const;
+
 private:
     virtual void Tick( float DeltaSeconds ) override;
-
-    ATank* GetControlledTank() const;
 
     // Move tank turret towards aim direction
     void AimTowardsCrosshair();
