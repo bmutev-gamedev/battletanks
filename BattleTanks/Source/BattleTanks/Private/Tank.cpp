@@ -22,11 +22,6 @@ void ATank::BeginPlay()
 	
 }
 
-void ATank::SetAimingComponentReference(UTankAimingComponent* AimingComponentToSet)
-{
-    TankAimingComponent = AimingComponentToSet;
-}
-
 void ATank::SetBarrelReference(UTankBarrel* BarrelToSet)
 {
     Barrel = BarrelToSet;

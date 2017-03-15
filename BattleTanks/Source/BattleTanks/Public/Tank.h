@@ -21,9 +21,6 @@ public:
 	ATank();
 
     UFUNCTION(BlueprintCallable, Category = "Setup")
-    void SetAimingComponentReference(UTankAimingComponent* AimingComponentToSet);
-
-    UFUNCTION(BlueprintCallable, Category = "Setup")
     void SetBarrelReference(UTankBarrel* BarrelToSet);
 
     void AimAt(FVector HitLocation);
