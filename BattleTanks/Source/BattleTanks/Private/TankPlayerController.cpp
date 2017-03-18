@@ -36,6 +36,9 @@ void ATankPlayerController::AimTowardsCrosshair()
     if (!ensure(AimingComponent)) { return; }
     
     FVector HitLocation; // Out parameter
+    bool bGotHitLocation = FindSightRayHitLocation(HitLocation);
+    //UE_LOG(LogTemp, Warning, TEXT("bGotHitLocation: %i"), bGotHitLocation)
+
     // If it hits the landscape     
     if (FindSightRayHitLocation(HitLocation)) // does line tracing
     {
