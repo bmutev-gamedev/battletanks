@@ -10,7 +10,8 @@ enum class EFiringState : uint8
 {
     Locked,
     Aiming,
-    Reloading
+    Reloading,
+    OutOfAmmo
 };
 
 class UTankBarrel;
@@ -42,6 +43,9 @@ protected:
 
     UPROPERTY(BlueprintReadOnly, Category = "State")
     EFiringState FiringState = EFiringState::Reloading;
+
+    UPROPERTY(BlueprintReadOnly, Category = "State")
+    int32 BulletsAmmo = 3;
 
 private:	
     // Called every frame

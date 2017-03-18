@@ -39,7 +39,11 @@ void UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType, F
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-    if ((FPlatformTime::Seconds() - LastFireTime) < ReloadTimeInSeconds)
+    if (BulletsAmmo <= 0)
+    {
+        FiringState = EFiringState::OutOfAmmo;
+    }
+    else if ((FPlatformTime::Seconds() - LastFireTime) < ReloadTimeInSeconds)
     {
         FiringState = EFiringState::Reloading;
     }
@@ -110,13 +114,14 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirectionToUse)
         DeltaRotator.Yaw -= (FMath::Clamp<float>(DeltaRotator.Yaw, -1, 1) * 360);
     }
     
-    UE_LOG(LogTemp, Warning, TEXT("FixedYaw: %f"), DeltaRotator.Yaw)
+    //UE_LOG(LogTemp, Warning, TEXT("FixedYaw: %f"), DeltaRotator.Yaw)
     Turret->Rotate(DeltaRotator.Yaw);
 }
 
 void UTankAimingComponent::Fire()
 {
-    if (FiringState != EFiringState::Reloading)
+    if (FiringState == EFiringState::Locked ||
+        FiringState == EFiringState::Aiming)
     {
         if (!ensure(Barrel)) { return; }
         if (!ensure(ProjectileBlueprint)) { return; }
@@ -130,6 +135,7 @@ void UTankAimingComponent::Fire()
 
         Projectile->LaunchProjectile(LaunchSpeed);
         LastFireTime = FPlatformTime::Seconds();
+        BulletsAmmo--;
     }
 
 }
