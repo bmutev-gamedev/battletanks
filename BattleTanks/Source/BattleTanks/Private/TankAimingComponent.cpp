@@ -109,13 +109,17 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirectionToUse)
 
     Barrel->Elevate(DeltaRotator.Pitch);
 
-    if (FMath::Abs(DeltaRotator.Yaw) > 180)
+    if (FMath::Abs(DeltaRotator.Yaw) < 180)
     {
-        DeltaRotator.Yaw -= (FMath::Clamp<float>(DeltaRotator.Yaw, -1, 1) * 360);
+        Turret->Rotate(DeltaRotator.Yaw);
+    }
+    else
+    {
+        Turret->Rotate(-DeltaRotator.Yaw);
     }
     
-    //UE_LOG(LogTemp, Warning, TEXT("FixedYaw: %f"), DeltaRotator.Yaw)
-    Turret->Rotate(DeltaRotator.Yaw);
+    UE_LOG(LogTemp, Warning, TEXT("FixedYaw: %f"), DeltaRotator.Yaw)
+    
 }
 
 void UTankAimingComponent::Fire()

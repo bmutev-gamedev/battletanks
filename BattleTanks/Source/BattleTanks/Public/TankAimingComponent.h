@@ -62,7 +62,7 @@ private:
     TSubclassOf<AProjectile> ProjectileBlueprint = nullptr;
 
     UPROPERTY(EditDefaultsOnly, Category = "Firing")
-    float LaunchSpeed = 10000; // TODO find sensible default
+    float LaunchSpeed = 8000; // TODO find sensible default
 
     UPROPERTY(EditDefaultsOnly, Category = "Firing")
     float ReloadTimeInSeconds = 3.0f;
