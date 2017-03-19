@@ -2,6 +2,7 @@
 
 #include "BattleTanks.h"
 #include "Tank.h" // So we can implement OnDeath()
+#include "AutoMortars.h" // So we can implement OnDeath()
 #include "TankAimingComponent.h"
 #include "TankAIController.h"
 // Depends on movement component via pathfinding system
@@ -40,14 +41,25 @@ void ATankAIController::SetPawn(APawn* InPawn)
 
     if (InPawn)
     {
+        // TODO Refactor!
         ATank* PossessedTank = Cast<ATank>(InPawn);
-        if (!ensure(PossessedTank)) { return; }
+        if (!ensure(PossessedTank)) 
+        {  
+            AAutoMortars* PossessedTank = Cast<AAutoMortars>(InPawn);
+            if (!ensure(PossessedTank)) { return; }
 
-        PossessedTank->OnDeath.AddUniqueDynamic(this, &ATankAIController::OnTankDeath);
+            PossessedTank->OnDeath.AddUniqueDynamic(this, &ATankAIController::OnTankDeath);
+        }
+        else
+        {
+            PossessedTank->OnDeath.AddUniqueDynamic(this, &ATankAIController::OnTankDeath);
+        }
     }
 }
 
 void ATankAIController::OnTankDeath()
 {
-    UE_LOG(LogTemp, Warning, TEXT("DEATH!"))
+    if (!GetControlledPawn()) { return; }
+
+    GetControlledPawn()->DetachFromControllerPendingDestroy();
 }

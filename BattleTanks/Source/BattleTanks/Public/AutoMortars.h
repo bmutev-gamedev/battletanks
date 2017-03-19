@@ -3,18 +3,18 @@
 #pragma once
 
 #include "GameFramework/Pawn.h"
-#include "Tank.generated.h"
+#include "AutoMortars.generated.h"
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnTankDeathDelegate);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnMortarDeathDelegate);
 
 UCLASS()
-class BATTLETANKS_API ATank : public APawn
+class BATTLETANKS_API AAutoMortars : public APawn
 {
 	GENERATED_BODY()
 
 public:
 	// Sets default values for this pawn's properties
-	ATank();
+	AAutoMortars();
 
     virtual float TakeDamage (float DamageAmount, struct FDamageEvent const & DamageEvent, class AController * EventInstigator, AActor * DamageCauser) override;
 
@@ -22,7 +22,7 @@ public:
     UFUNCTION(BlueprintPure, Category = "Health")
     float GetHealthPercent() const;
 
-    FOnTankDeathDelegate OnDeath;
+    FOnMortarDeathDelegate OnDeath;
 
 protected:
     virtual void BeginPlay() override;

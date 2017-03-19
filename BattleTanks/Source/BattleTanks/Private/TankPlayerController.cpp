@@ -43,7 +43,7 @@ void ATankPlayerController::SetPawn(APawn* InPawn)
 
 void ATankPlayerController::OnTankDeath()
 {
-    UE_LOG(LogTemp, Warning, TEXT("DEATH!"))
+    StartSpectatingOnly();
 }
 
 // Move tank turret towards aim direction
