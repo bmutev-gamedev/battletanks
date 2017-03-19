@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "BattleTanks.h"
+#include "Tank.h" // So we can implement OnDeath()
 #include "TankAimingComponent.h"
 #include "TankAIController.h"
 // Depends on movement component via pathfinding system
@@ -31,4 +32,22 @@ void ATankAIController::Tick( float DeltaSeconds )
     {
         AimingComponent->Fire();
     }
+}
+
+void ATankAIController::SetPawn(APawn* InPawn)
+{
+    Super::SetPawn(InPawn);
+
+    if (InPawn)
+    {
+        ATank* PossessedTank = Cast<ATank>(InPawn);
+        if (!ensure(PossessedTank)) { return; }
+
+        PossessedTank->OnDeath.AddUniqueDynamic(this, &ATankAIController::OnTankDeath);
+    }
+}
+
+void ATankAIController::OnTankDeath()
+{
+    UE_LOG(LogTemp, Warning, TEXT("DEATH!"))
 }

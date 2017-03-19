@@ -1,6 +1,7 @@
 // Copirtight Funny Ltd.
 
 #include "BattleTanks.h"
+#include "Tank.h" // So we can implement OnDeath()
 #include "TankAimingComponent.h"
 #include "TankPlayerController.h"
 
@@ -25,6 +26,24 @@ void ATankPlayerController::Tick( float DeltaSeconds )
 {
     Super::Tick(DeltaSeconds);
     AimTowardsCrosshair();
+}
+
+void ATankPlayerController::SetPawn(APawn* InPawn)
+{
+    Super::SetPawn(InPawn);
+
+    if (InPawn)
+    {
+        ATank* PossessedTank = Cast<ATank>(InPawn);
+        if (!ensure(PossessedTank)) { return; }
+
+        PossessedTank->OnDeath.AddUniqueDynamic(this, &ATankPlayerController::OnTankDeath);
+    }
+}
+
+void ATankPlayerController::OnTankDeath()
+{
+    UE_LOG(LogTemp, Warning, TEXT("DEATH!"))
 }
 
 // Move tank turret towards aim direction
