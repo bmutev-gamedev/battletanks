@@ -22,6 +22,7 @@ protected:
 
     UProjectileMovementComponent* ProjectileMovementComponent = nullptr;
 
+private:
     UPROPERTY(VisibleAnywhere, Category = "Components")
     UStaticMeshComponent* CollisionMesh = nullptr;
 
@@ -34,8 +35,11 @@ protected:
     UPROPERTY(VisibleAnywhere, Category = "Components")
     URadialForceComponent* ExplosionForce = nullptr;
 
-private:
     UFUNCTION()
     void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit);
 
+    void OnTimerExpire();
+
+    UPROPERTY(EditDefaultsOnly, Category = "Setup")
+    float DestroyDelay = 3;
 };
