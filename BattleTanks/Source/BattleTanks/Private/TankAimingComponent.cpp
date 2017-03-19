@@ -121,10 +121,7 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirectionToUse)
     else
     {
         Turret->Rotate(-DeltaRotator.Yaw);
-    }
-    
-    UE_LOG(LogTemp, Warning, TEXT("FixedYaw: %f"), DeltaRotator.Yaw)
-    
+    }    
 }
 
 void UTankAimingComponent::Fire()

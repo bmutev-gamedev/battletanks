@@ -51,8 +51,15 @@ void AProjectile::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, U
     ImpactBlast->Activate();
     ExplosionForce->FireImpulse();
 
-    SetRootComponent(ImpactBlast);
-    CollisionMesh->DestroyComponent();
+    // TODO Radial damage is not always applied, suspision for collision prolem
+    UGameplayStatics::ApplyRadialDamage(
+        this,
+        ProjectileDamage,
+        GetActorLocation(),
+        ExplosionForce->Radius,
+        UDamageType::StaticClass(),
+        TArray<AActor*>() // damage all actors
+        );
 
     FTimerHandle Timer;
     GetWorld()->GetTimerManager().SetTimer(Timer, this, &AProjectile::OnTimerExpire, DestroyDelay, false);
