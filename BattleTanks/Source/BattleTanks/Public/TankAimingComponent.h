@@ -34,6 +34,9 @@ public:
 
     EFiringState GetFiringState() const;
 
+    UFUNCTION(BlueprintCallable, Category = "Setup")
+    int32 GetBulletsCount() const;
+
     UFUNCTION(BlueprintCallable, Category = "Firing")
     void Fire();
 
@@ -43,9 +46,6 @@ protected:
 
     UPROPERTY(BlueprintReadOnly, Category = "State")
     EFiringState FiringState = EFiringState::Reloading;
-
-    UPROPERTY(BlueprintReadOnly, Category = "State")
-    int32 BulletsAmmo = 3;
 
 private:	
     // Called every frame
@@ -66,6 +66,9 @@ private:
 
     UPROPERTY(EditDefaultsOnly, Category = "Firing")
     float ReloadTimeInSeconds = 3.0f;
+
+    UPROPERTY(EditDefaultsOnly, Category = "Firing")
+    int32 BulletsAmmo = 3;
 
     double LastFireTime = 0;
 
