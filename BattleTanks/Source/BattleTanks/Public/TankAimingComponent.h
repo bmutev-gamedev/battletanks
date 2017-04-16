@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Copirtight Funny Ltd.
 
 #pragma once
 
@@ -18,6 +18,10 @@ class UTankBarrel;
 class UTankTurret;
 class AProjectile;
 
+/**
+ * TankAimingComponent when attached to a tank or mortar pawn is used to move the turret and barrel parts,
+ * to "fire" a projectile from the barrel and to track the firing state.
+ */
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class BATTLETANKS_API UTankAimingComponent : public UActorComponent
 {

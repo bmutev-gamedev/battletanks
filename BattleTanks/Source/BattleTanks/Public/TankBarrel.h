@@ -5,6 +5,11 @@
 #include "Components/StaticMeshComponent.h"
 #include "TankBarrel.generated.h"
 
+/**
+ * TankBarrel is the base class for the barrel part of the tank turret and the mortar turret.
+ *
+ * This class holds the elevation constraints for the barrel.
+ */
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class BATTLETANKS_API UTankBarrel : public UStaticMeshComponent
 {

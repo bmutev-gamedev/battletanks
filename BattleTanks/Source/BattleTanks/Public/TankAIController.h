@@ -1,10 +1,14 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Copirtight Funny Ltd.
 
 #pragma once
 
 #include "AIController.h"
 #include "TankAIController.generated.h"
 
+/**
+ * TankAIController is the base class for the AI Controller Blueprint used to control
+ * tanks or mortars.
+ */
 UCLASS()
 class BATTLETANKS_API ATankAIController : public AAIController
 {

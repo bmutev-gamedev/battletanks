@@ -8,7 +8,9 @@
 class UTankTrack;
 
 /**
- * Responsible for driving the tank tracks
+ * TankMovementComponent is a component for the tank and mortar pawns.
+ *
+ * This class is responsible for driving the tank tracks.
  */
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class BATTLETANKS_API UTankMovementComponent : public UNavMovementComponent

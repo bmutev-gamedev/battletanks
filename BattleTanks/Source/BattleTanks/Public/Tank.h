@@ -7,6 +7,10 @@
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnTankDeathDelegate);
 
+/**
+ * Tank is the base class of the Tank pawn controlled by the player through a Player Controller 
+ * or by the AI through AI Controller.
+ */
 UCLASS()
 class BATTLETANKS_API ATank : public APawn
 {

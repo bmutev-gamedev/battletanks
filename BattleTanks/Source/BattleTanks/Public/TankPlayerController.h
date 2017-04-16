@@ -6,8 +6,10 @@
 #include "TankPlayerController.generated.h"
 
 /**
-* Responsible for helping the player control the tank
-*/
+ * TankPlayerController is the base class for the TankPlayerController Blueprint.
+ *
+ * This class is responsible for helping the player control the tank.
+ */
 UCLASS()
 class BATTLETANKS_API ATankPlayerController : public APlayerController
 {

@@ -1,10 +1,13 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Copirtight Funny Ltd.
 
 #pragma once
 
 #include "GameFramework/Actor.h"
 #include "Projectile.generated.h"
 
+/**
+ * Projectile is a base class for the projectile actor, spawned when a gun is fired.
+ */
 UCLASS()
 class BATTLETANKS_API AProjectile : public AActor
 {

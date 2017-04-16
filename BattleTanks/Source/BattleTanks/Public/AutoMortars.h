@@ -7,6 +7,10 @@
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnMortarDeathDelegate);
 
+/**
+ * AutoMortars is a base class for the mortar pawn controlled by an AI Controller,
+ * when placed in the world.
+ */
 UCLASS()
 class BATTLETANKS_API AAutoMortars : public APawn
 {
