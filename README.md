@@ -1,6 +1,6 @@
 # Battle Tanks
 ---
-This repository houses my game project for a third person tank fighting game Battle Tanks. I started the creation of this game during my course at Udemy - "The Unreal Engine Developer Course - Learn C++ & Make Games", found [here](https://www.udemy.com/unrealcourse?couponCode=GitHubDiscount), led by Ben Tristem and Sam Pattuzzi.
+This repository houses my game project for a third person tank fighting game Battle Tanks. I started the creation of this game during my course at Udemy - "The Unreal Engine Developer Course - Learn C++ & Make Games", found [here](https://www.udemy.com/unrealcourse?couponCode=GitHubDiscount), led by Ben Tristem and Sam Pattuzzi. As of now this is not yet a full-fledged game.
 
 ## Technical information
 The game has been created with UnrealEngine 4.15.1 and VisualStudio 2015. It is written mainly in C++ but I also have taken advantage of the blueprint system for the UI and player movement controls mapping. 
